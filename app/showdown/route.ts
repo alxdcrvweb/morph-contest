@@ -9,8 +9,7 @@ export async function POST(request: NextRequest) {
   const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/showdown.jpg`;
   const body = await request.json();
   const { message } = await validateFrameMessage(body);
-  let button =
-    message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
+  let button = message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
   if (button == 1 && message) {
     return getTimer(message);
   } else {
