@@ -12,7 +12,7 @@ import { getWinners, getWinningStatus } from "../lib/db";
 import { FrameActionMessage } from "@farcaster/core";
 export async function getTimer(message: FrameActionMessage) {
   const total =
-    Date.parse("2024-02-20 21:28:00 GMT+0100") -
+    Date.parse("2024-02-20 23:29:00 GMT+0100") -
     Date.parse(new Date().toString());
   function getTimeRemaining(total: any) {
     const seconds = Math.floor((total / 1000) % 60);
@@ -70,15 +70,16 @@ export async function getTimer(message: FrameActionMessage) {
         image: `${process.env.NEXT_PUBLIC_HOST}/congratz.jpg`,
         buttons: [
           {
-            label: `Sleep Faction`,
+            label: `Back`,
             action: "post",
           },
           {
-            label: `Vigilant Faction`,
-            action: "post",
+            label: `Website`,
+            action: "link",
+            target: "https://mrphs.io",
           },
         ],
-        postUrl: `${process.env.NEXT_PUBLIC_HOST}/result`,
+        postUrl: `${process.env.NEXT_PUBLIC_HOST}/main`,
       };
       const html = getFrameHtml(frame);
 
@@ -94,15 +95,16 @@ export async function getTimer(message: FrameActionMessage) {
         image: `${process.env.NEXT_PUBLIC_HOST}/lose.jpg`,
         buttons: [
           {
-            label: `Sleep Faction`,
+            label: `Back`,
             action: "post",
           },
           {
-            label: `Vigilant Faction`,
-            action: "post",
+            label: `Website`,
+            action: "link",
+            target: "https://mrphs.io",
           },
         ],
-        postUrl: `${process.env.NEXT_PUBLIC_HOST}/result`,
+        postUrl: `${process.env.NEXT_PUBLIC_HOST}/main`,
       };
       const html = getFrameHtml(frame);
 
