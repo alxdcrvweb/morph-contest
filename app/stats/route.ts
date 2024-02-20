@@ -12,8 +12,8 @@ export async function POST(request: NextRequest) {
   let button =
     message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
 
-  if (button == 1) {
-    return getTimer(request);
+  if (button == 1 && message) {
+    return getTimer(message);
   } else {
     const frame: Frame = {
       image: imageUrl,

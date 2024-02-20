@@ -1,13 +1,16 @@
 // handle frame actions
 // ./app/frames/route.ts
 
-import { getFrameHtml, validateFrameMessage, Frame } from "frames.js";
+import {
+  getFrameHtml,
+  validateFrameMessage,
+  Frame,
+  FrameActionPayload,
+} from "frames.js";
 import { NextRequest } from "next/server";
 import { getWinners, getWinningStatus } from "../lib/db";
-
-export async function getTimer(request: NextRequest) {
-  const body = await request.json();
-  const { isValid, message } = await validateFrameMessage(body);
+import { FrameActionMessage } from "@farcaster/core";
+export async function getTimer(message: FrameActionMessage) {
   const total =
     Date.parse("2024-02-21 18:00:00 GMT+0100") -
     Date.parse(new Date().toString());
