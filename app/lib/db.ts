@@ -65,6 +65,7 @@ export const getWinners = async (hash: string) => {
       address: userInfo.result.user.custodyAddress,
       winner: true,
     });
+    console.log(user);
     await user.save();
     console.log(7);
   }
