@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
 
   if (button == 1) {
-    return getTimer();
+    return getTimer(request);
   } else {
     const frame: Frame = {
       image: imageUrl,

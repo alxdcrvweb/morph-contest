@@ -3,8 +3,11 @@
 
 import { getFrameHtml, validateFrameMessage, Frame } from "frames.js";
 import { NextRequest } from "next/server";
+import { getWinners, getWinningStatus } from "../lib/db";
 
-export async function getTimer() {
+export async function getTimer(request: NextRequest) {
+  const body = await request.json();
+  const { isValid, message } = await validateFrameMessage(body);
   const total =
     Date.parse("2024-02-21 18:00:00 GMT+0100") -
     Date.parse(new Date().toString());
@@ -29,13 +32,12 @@ export async function getTimer() {
       image: imageUrl,
       buttons: [
         {
-          label: `Back`,
+          label: `Refresh`,
           action: "post",
         },
         {
-          label: `Learn More`,
-          action: "link",
-          target: "https://mrphs.io/",
+          label: `Back`,
+          action: "post",
         },
       ],
       postUrl: process.env.NEXT_PUBLIC_HOST + "/main",
@@ -50,32 +52,62 @@ export async function getTimer() {
       },
       status: 200,
     });
-  } else {
-    const frame: Frame = {
-      version: "vNext",
-      image: `${process.env.NEXT_PUBLIC_HOST}/images.jpg`,
-      buttons: [
-        {
-          label: `Sleep Faction`,
-          action: "post",
-        },
-        {
-          label: `Vigilant Faction`,
-          action: "post",
-        },
-      ],
-      postUrl: `${process.env.NEXT_PUBLIC_HOST}/result`,
-    };
+  } else if (total <= 0) {
+    const hash = message?.data.frameActionBody.castId?.hash.toString();
+    const fid = Number(message?.data.fid);
+    //@ts-ignore
+    await getWinners(hash);
+    const win = await getWinningStatus(fid);
 
-    // Return the frame as HTML
-    const html = getFrameHtml(frame);
+    if (win) {
+      const frame: Frame = {
+        version: "vNext",
+        image: `${process.env.NEXT_PUBLIC_HOST}/congratz.jpg`,
+        buttons: [
+          {
+            label: `Sleep Faction`,
+            action: "post",
+          },
+          {
+            label: `Vigilant Faction`,
+            action: "post",
+          },
+        ],
+        postUrl: `${process.env.NEXT_PUBLIC_HOST}/result`,
+      };
+      const html = getFrameHtml(frame);
 
-    return new Response(html, {
-      headers: {
-        "Content-Type": "text/html",
-      },
-      status: 200,
-    });
+      return new Response(html, {
+        headers: {
+          "Content-Type": "text/html",
+        },
+        status: 200,
+      });
+    } else {
+      const frame: Frame = {
+        version: "vNext",
+        image: `${process.env.NEXT_PUBLIC_HOST}/lose.jpg`,
+        buttons: [
+          {
+            label: `Sleep Faction`,
+            action: "post",
+          },
+          {
+            label: `Vigilant Faction`,
+            action: "post",
+          },
+        ],
+        postUrl: `${process.env.NEXT_PUBLIC_HOST}/result`,
+      };
+      const html = getFrameHtml(frame);
+
+      return new Response(html, {
+        headers: {
+          "Content-Type": "text/html",
+        },
+        status: 200,
+      });
+    }
   }
   // Use the frame message to build the frame
 }

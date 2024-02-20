@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 import { getTimer } from "../components/timer";
 
 export async function POST(request: NextRequest) {
-  const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/showdown.jpg`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/mainScreen.gif`;
   const body = await request.json();
   const { isValid, message } = await validateFrameMessage(body);
   let button =
@@ -25,14 +25,13 @@ export async function POST(request: NextRequest) {
         },
         {
           action: "post",
-          label: "Next",
+          label: "About",
         },
       ],
-      postUrl: `${process.env.NEXT_PUBLIC_HOST}/traits`,
+      postUrl: `${process.env.NEXT_PUBLIC_HOST}/showdown`,
     };
 
     // Return the frame as HTML
-
     const html = getFrameHtml(frame);
 
     return new Response(html, {

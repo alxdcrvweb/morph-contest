@@ -8,8 +8,6 @@ declare global {
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 
-let isDecided = false;
-
 if (!MONGODB_URI) {
   throw new Error(
     "Please define the MONGODB_URI environment variable inside .env.local"
@@ -45,14 +43,16 @@ export const dbConnect = async () => {
 };
 
 export const getWinners = async (hash: string) => {
-  if (isDecided) return false;
-  isDecided = true;
   let participants = await getCastRecasts(hash);
   let winners = getRandom(
     participants,
     participants.length >= 10 ? 10 : participants.length
   );
   await dbConnect();
+  let users = await User.find();
+  if (users.length > 0) {
+    return false;
+  }
   for (let winner of winners) {
     let userInfo = await getUserInfo(winner);
     let user = new User({
@@ -62,6 +62,7 @@ export const getWinners = async (hash: string) => {
     });
     await user.save();
   }
+  return true;
 };
 
 export const getWinningStatus = async (fid: number) => {

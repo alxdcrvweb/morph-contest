@@ -13,25 +13,22 @@ export async function POST(request: NextRequest) {
     message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
 
   if (button == 1) {
-    return getTimer();
+    return getTimer(request);
   } else {
     const frame: Frame = {
       image: imageUrl,
       version: "vNext",
       buttons: [
         {
-          label: "Website",
-          action: "link",
-          target: "https://mrphs.io/",
+          label: "Check the winners",
+          action: "post",
         },
         {
-          label: "Roadmap",
-          action: "link",
-          target:
-            "https://adev.notion.site/Morpheus-ae4be3d10e6047ed905459e9199ea66f",
+          label: "Back",
+          action: "post",
         },
       ],
-      postUrl: `${process.env.NEXT_PUBLIC_HOST}/`,
+      postUrl: `${process.env.NEXT_PUBLIC_HOST}/showdown`,
     };
 
     // Return the frame as HTML
