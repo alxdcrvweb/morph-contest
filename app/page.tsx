@@ -1,4 +1,3 @@
-
 import { Frame, getFrameFlattened } from "frames.js";
 import type { Metadata } from "next";
 
@@ -10,8 +9,7 @@ const initialFrame: Frame = {
   buttons: [
     {
       label: "Check the winners",
-      action: "link",
-      target: "/check-winners",
+      action: "post",
     },
     {
       action: "post",

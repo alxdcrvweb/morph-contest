@@ -12,8 +12,7 @@ export async function POST(request: NextRequest) {
     buttons: [
       {
         label: "Check the winners",
-        action: "link",
-        target: "/check-winners",
+        action: "post",
       },
       {
         action: "post",

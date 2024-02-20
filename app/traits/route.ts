@@ -15,9 +15,8 @@ export async function POST(request: NextRequest) {
         action: "post",
       },
       {
-        action: "link",
+        action: "post",
         label: "Next",
-        target: "/next",
       },
     ],
     postUrl: `${process.env.NEXT_PUBLIC_HOST}/images`,
