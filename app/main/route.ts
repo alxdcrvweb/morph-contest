@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         },
         {
           action: "post",
-          label: "About",
+          label: "About Project",
         },
       ],
       postUrl: `${process.env.NEXT_PUBLIC_HOST}/showdown`,
