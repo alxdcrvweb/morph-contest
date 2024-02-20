@@ -19,7 +19,6 @@ export async function getTimer(message: FrameActionMessage) {
     const minutes = Math.floor((total / 1000 / 60) % 60);
     const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
     const days = Math.floor(total / (1000 * 60 * 60 * 24));
-
     return `${days < 10 ? "0" + days : days} : ${
       hours < 10 ? "0" + hours : hours
     } : ${minutes < 10 ? "0" + minutes : minutes} : ${
