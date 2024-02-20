@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { getCastRecasts, getUserInfo } from "./neynar";
-import User, { Users } from "../models/user";
+import User from "../models/user";
 
 declare global {
   var mongoose: any; // This must be a `var` and not a `let / const`
