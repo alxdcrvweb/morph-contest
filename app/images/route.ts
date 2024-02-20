@@ -11,9 +11,9 @@ export async function POST(request: NextRequest) {
     version: "vNext",
     buttons: [
       {
-        label: "Website",
+        label: "Check the winners",
         action: "link",
-        target: "https://mrphs.io/",
+        target: "/check-winners",
       },
       {
         action: "post",

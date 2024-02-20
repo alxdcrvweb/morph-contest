@@ -11,13 +11,13 @@ export async function POST(request: NextRequest) {
     version: "vNext",
     buttons: [
       {
-        label: "Website",
-        action: "link",
-        target: "https://mrphs.io/",
+        label: "Check the winners",
+        action: "post",
       },
       {
-        action: "post",
+        action: "link",
         label: "Next",
+        target: "/next",
       },
     ],
     postUrl: `${process.env.NEXT_PUBLIC_HOST}/images`,

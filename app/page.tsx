@@ -1,31 +1,21 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import {
-  FrameContainer,
-  FrameImage,
-  FrameButton,
-  useFramesReducer,
-  getPreviousFrame,
-  validateActionSignature,
-  FrameInput,
-} from "frames.js/next/server";
-import { Frame, getFrameFlattened, getFrameHtml } from "frames.js";
+
+import { Frame, getFrameFlattened } from "frames.js";
 import type { Metadata } from "next";
 
 // Declare the frame
-const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/morph.jpg`;
+const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/mainScreen.gif`;
 const initialFrame: Frame = {
   image: imageUrl,
   version: "vNext",
   buttons: [
     {
-      label: "Website",
+      label: "Check the winners",
       action: "link",
-      target: "https://mrphs.io/",
+      target: "/check-winners",
     },
     {
       action: "post",
-      label: "Next",
+      label: "About",
     },
   ],
   postUrl: `${process.env.NEXT_PUBLIC_HOST}/showdown`,
