@@ -45,17 +45,18 @@ export const dbConnect = async () => {
 };
 
 export const getWinners = async (hash: string) => {
-  let participants = await getCastRecasts(hash);
-  let winners = getRandom(
-    participants,
-    participants.length >= 10 ? 10 : participants.length
-  );
   await dbConnect();
   let users = await User.find();
   console.log(5);
   if (users.length > 0) {
     return false;
   }
+  let participants = await getCastRecasts(hash);
+  let winners = getRandom(
+    participants,
+    participants.length >= 10 ? 10 : participants.length
+  );
+
   for (let winner of winners) {
     console.log(6);
     let userInfo = await getUserInfo(winner);
