@@ -30,9 +30,6 @@ export async function POST(request: NextRequest) {
       ],
       postUrl: `${process.env.NEXT_PUBLIC_HOST}/traits`,
     };
-
-    // Return the frame as HTML
-
     const html = getFrameHtml(frame);
 
     return new Response(html, {
