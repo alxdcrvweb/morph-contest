@@ -24,6 +24,7 @@ export const dbConnect = async () => {
   if (cached.conn) {
     return cached.conn;
   }
+  console.log(1, cached);
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
@@ -32,13 +33,14 @@ export const dbConnect = async () => {
       return mongoose;
     });
   }
+  console.log(2, cached);
   try {
     cached.conn = await cached.promise;
   } catch (e) {
     cached.promise = null;
     throw e;
   }
-
+  console.log(3, cached);
   return cached.conn;
 };
 
@@ -50,10 +52,12 @@ export const getWinners = async (hash: string) => {
   );
   await dbConnect();
   let users = await User.find();
+  console.log(5);
   if (users.length > 0) {
     return false;
   }
   for (let winner of winners) {
+    console.log(6);
     let userInfo = await getUserInfo(winner);
     let user = new User({
       fid: winner,
@@ -61,6 +65,7 @@ export const getWinners = async (hash: string) => {
       winner: true,
     });
     await user.save();
+    console.log(7);
   }
   return true;
 };
