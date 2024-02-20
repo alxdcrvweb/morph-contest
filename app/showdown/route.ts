@@ -40,4 +40,3 @@ export async function POST(request: NextRequest) {
     });
   }
 }
-// Use the frame message to build the frame
