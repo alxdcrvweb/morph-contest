@@ -24,7 +24,7 @@ export const dbConnect = async () => {
   if (cached.conn) {
     return cached.conn;
   }
-  console.log(1, cached);
+  console.log(1);
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
@@ -33,14 +33,14 @@ export const dbConnect = async () => {
       return mongoose;
     });
   }
-  console.log(2, cached);
+  console.log(2);
   try {
     cached.conn = await cached.promise;
   } catch (e) {
     cached.promise = null;
     throw e;
   }
-  console.log(3, cached);
+  console.log(3);
   return cached.conn;
 };
 
@@ -72,11 +72,12 @@ export const getWinners = async (hash: string) => {
 };
 
 export const getWinningStatus = async (fid: number) => {
-  try {
-    await dbConnect();
-  } catch (error) {
-    console.log("connect error (already connected?)");
-  }
+  // try {
+  //   await dbConnect();
+  // } catch (error) {
+  //   console.log("connect error (already connected?)");
+  // }
+  await dbConnect();
   let check = await User.find({ fid });
   if (check) return true;
   return false;
