@@ -46,7 +46,7 @@ export async function GET(request: Request) {
       //@ts-ignore
       <div style={frame}>
         {/* <img style={logo} src={`${process.env.NEXT_PUBLIC_HOST}/logo.svg`}/> */}
-        <div style={{fontFamily: 'ApocLC', fontSize: "20px", color: "white"}}>See you soon</div>
+        <div style={{fontFamily: 'ApocLC', fontSize: "38px", color: "white"}}>Raffle is ongoing, come back when timer hits 0</div>
         <div style={{ display: "flex", fontFamily: 'ApocLC', fontSize: "122px", color: "white" }}>
           {time}
         </div>
