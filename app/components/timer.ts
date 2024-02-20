@@ -57,7 +57,10 @@ export async function getTimer(message: FrameActionMessage) {
   } else if (total <= 0) {
     // const hash = "0x9d021952c7208c3a120aeea23441836a6870acba"
     // const fid = 292319
-    const hash = Buffer.from(message?.data.frameActionBody.castId?.hash!).toString('hex');
+    const bytesToHexString = (bytes: Uint8Array): string => {
+      return ("0x" + Buffer.from(bytes).toString("hex")) as string;
+    }
+    const hash = bytesToHexString(message?.data.frameActionBody.castId?.hash!)
     const fid = Number(message?.data.fid);
     //@ts-ignore
     await getWinners(hash);
