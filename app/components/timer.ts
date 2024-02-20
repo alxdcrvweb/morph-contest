@@ -12,7 +12,7 @@ import { getWinners, getWinningStatus } from "../lib/db";
 import { FrameActionMessage } from "@farcaster/core";
 export async function getTimer(message: FrameActionMessage) {
   const total =
-    Date.parse("2024-02-21 00:01:00 GMT+0100") -
+    Date.parse("2024-02-21 00:02:00 GMT+0100") -
     Date.parse(new Date().toString());
   function getTimeRemaining(total: any) {
     const seconds = Math.floor((total / 1000) % 60);
@@ -57,7 +57,7 @@ export async function getTimer(message: FrameActionMessage) {
   } else if (total <= 0) {
     // const hash = "0x9d021952c7208c3a120aeea23441836a6870acba"
     // const fid = 292319
-    const hash = Buffer.from(message?.data.frameActionBody.castId?.hash!).toString()
+    const hash = Buffer.from(message?.data.frameActionBody.castId?.hash!).toString('hex');
     const fid = Number(message?.data.fid);
     //@ts-ignore
     await getWinners(hash);
