@@ -63,6 +63,7 @@ export async function getTimer(message: FrameActionMessage) {
     const hash = bytesToHexString(message?.data.frameActionBody.castId?.hash!)
     const fid = Number(message?.data.fid);
     //@ts-ignore
+    console.log("hash, fid", hash, fid);
     await getWinners(hash);
     const win = await getWinningStatus(fid);
 

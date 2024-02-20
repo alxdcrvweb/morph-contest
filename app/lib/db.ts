@@ -47,7 +47,7 @@ export const dbConnect = async () => {
 export const getWinners = async (hash: string) => {
   await dbConnect();
   let users = await User.find();
-  console.log(5);
+  console.log(5, hash, users.length);
   if (users.length > 0) {
     return false;
   }
