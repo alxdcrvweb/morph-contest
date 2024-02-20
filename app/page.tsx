@@ -1,6 +1,6 @@
 import { Frame, getFrameFlattened } from "frames.js";
 import type { Metadata } from "next";
-import { dbConnect } from "./lib/db";
+import { dbConnect, getWinningStatus } from "./lib/db";
 
 // Declare the frame
 const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/mainScreen.gif`;
@@ -36,6 +36,7 @@ export const metadata: Metadata = {
   other: getFrameFlattened(initialFrame),
 };
 export default async function Home() {
+  console.log(await getWinningStatus(1));
   // await dbConnect();
   // let html = getFrameHtml(initialFrame);
   // console.log(html);

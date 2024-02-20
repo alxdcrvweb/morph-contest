@@ -79,7 +79,7 @@ export const getWinningStatus = async (fid: number) => {
   // }
   await dbConnect();
   let check = await User.find({ fid });
-  if (check) return true;
+  if (check.length > 0) return true;
   return false;
 };
 
