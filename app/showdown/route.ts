@@ -8,7 +8,7 @@ import { getTimer } from "../components/timer";
 export async function POST(request: NextRequest) {
   const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/showdown.jpg`;
   const body = await request.json();
-  const { isValid, message } = await validateFrameMessage(body);
+  const { message } = await validateFrameMessage(body);
   let button =
     message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
 
