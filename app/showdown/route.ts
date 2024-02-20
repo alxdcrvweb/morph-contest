@@ -11,7 +11,6 @@ export async function POST(request: NextRequest) {
   const { message } = await validateFrameMessage(body);
   let button =
     message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
-
   if (button == 1 && message) {
     return getTimer(message);
   } else {
