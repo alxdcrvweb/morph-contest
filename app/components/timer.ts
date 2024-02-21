@@ -58,10 +58,10 @@ export async function getTimer(message: FrameActionMessage) {
     // const hash = "0x9d021952c7208c3a120aeea23441836a6870acba"
     // const fid = 292319
     const bytesToHexString = (bytes: Uint8Array): string => {
-      return ("0x" + Buffer.from(bytes).toString("hex")) as string;
+      return ("0x" + Buffer.from(bytes).toString("base64")) as string;
     }
     const hash = bytesToHexString(message?.data.frameActionBody.castId?.hash!)
-    const fid = Number(message?.data.fid);
+    const fid = message?.data.fid;
     //@ts-ignore
     console.log("msg, hash, fid, message.data", message?.data.frameActionBody.castId?.hash, hash, fid, message?.data);
     await getWinners(hash);
