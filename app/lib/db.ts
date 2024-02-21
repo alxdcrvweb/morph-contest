@@ -52,11 +52,12 @@ export const getWinners = async ( fid: number, hash?: string) => {
     return false;
   }
   // let participants = await getCastRecasts(hash!);
+  console.log(hash,fid)
   let d = await getCastRecastsTwo(hash!, fid);
   // console.log("http",d)
   let winners = getRandom(
     d,
-    d?.length >= 1 ? 1 : d?.length
+    d?.length >= 10 ? 10 : d?.length
   );
     console.log(winners)
   for (let winner of winners) {
