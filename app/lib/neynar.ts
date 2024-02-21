@@ -47,7 +47,7 @@ export const getCastRecastsTwo = async(hash:string, fid: number) => {
             d.push(c.data.fid)
         }
         pageToken = b.nextPageToken;
-        if(pageToken = "") {
+        if(pageToken == "") {
             break;
         }
     }
