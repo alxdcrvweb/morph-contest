@@ -36,7 +36,6 @@ export const metadata: Metadata = {
   other: getFrameFlattened(initialFrame),
 };
 export default async function Home() {
-  await getWinners(228880, "0xefa68e91f1981a6a26dfaa7514d89b9aec0ad5a8")
   // let html = getFrameHtml(initialFrame);
   // console.log(html);
   return <div>Morpheus Frame</div>;
