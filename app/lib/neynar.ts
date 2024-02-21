@@ -1,5 +1,6 @@
 import { NeynarAPIClient } from "@neynar/nodejs-sdk";
 const client = new NeynarAPIClient(process.env.NEYNAR_API_KEY!);
+const delay = (ms:number) => new Promise((res) => setTimeout(res, ms));
 
 export const getUserInfo = async(fid:number) => {
     let userInfo = await client.lookupUserByFid(fid);
@@ -31,7 +32,6 @@ export const getCastRecastsTwo = async(hash:string, fid: number) => {
     while(true) {
         let url = baseUrl;
         if( typeof pageToken == "string") {
-            console.log(pageToken)
             url = url + `&pageToken=${pageToken}`
         }
         console.log(url)
@@ -47,7 +47,7 @@ export const getCastRecastsTwo = async(hash:string, fid: number) => {
             d.push(c.data.fid)
         }
         pageToken = b.nextPageToken;
-        if(pageToken = "") {
+        if(pageToken == "") {
             break;
         }
     }
