@@ -64,7 +64,7 @@ export const getWinners = async ( fid: number, hash?: string) => {
   // console.log("http",d)
   let winners = getRandom(
     d,
-    d?.length >= 1 ? 1 : d?.length
+    d?.length >= 10 ? 10 : d?.length
   );
     console.log(winners)
   for (let winner of winners) {
