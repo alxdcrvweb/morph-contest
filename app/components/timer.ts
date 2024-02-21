@@ -61,9 +61,10 @@ export async function getTimer(message: FrameActionDataParsedAndHubContext) {
 
     const hash = message?.castId?.hash
     const fid = message?.requesterFid;
+    const creatorFid = message.castId?.fid;
     //@ts-ignore
     console.log("msg, hash, fid, message.data", message?.castId?.hash, hash, fid);
-    await getWinners(hash);
+    await getWinners(hash, fid);
     const win = await getWinningStatus(fid);
 
     if (win) {
