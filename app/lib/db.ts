@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { getCastRecasts, getCastRecastsTwo, getUserInfo } from "./neynar";
 import User from "../models/user";
+import Check from "../models/check";
 
 declare global {
   var mongoose: any; // This must be a `var` and not a `let / const`
@@ -48,9 +49,14 @@ export const getWinners = async ( fid: number, hash?: string) => {
   await dbConnect();
   let users = await User.find();
   console.log(5, hash, users?.length);
-  if (users?.length > 0) {
-    return false;
-  }
+  await Check.findOneAndUpdate(
+    { isInitialized: true }, // query
+    { $setOnInsert: { isInitialized:true }}, // new doc fields
+    { upsert: true } // still use upsert option
+  );
+  // if (users?.length > 0) {
+  //   return false;
+  // }
   // let participants = await getCastRecasts(hash!);
   console.log(hash,fid)
   let d = await getCastRecastsTwo(hash!, fid);
