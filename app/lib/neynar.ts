@@ -6,7 +6,7 @@ export const getUserInfo = async(fid:number) => {
     return userInfo;
 }
 
-export const getCastRecasts = async(hash:string) => {
-    let castInfo = await client.lookUpCastByHash(hash);
+export const getCastRecasts = async(hash?:string) => {
+    let castInfo = await client.lookUpCastByHash(hash as string);
     return castInfo?.result?.cast?.reactions?.fids;
 }

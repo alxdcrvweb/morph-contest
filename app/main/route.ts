@@ -1,16 +1,16 @@
 // handle frame actions
 // ./app/frames/route.ts
 
-import { getFrameHtml, validateFrameMessage, Frame } from "frames.js";
+import { getFrameHtml, validateFrameMessage, Frame, getFrameMessage } from "frames.js";
 import { NextRequest } from "next/server";
 import { getTimer } from "../components/timer";
 
 export async function POST(request: NextRequest) {
   const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/mainScreen.gif`;
   const body = await request.json();
-  const { isValid, message } = await validateFrameMessage(body);
+  let message = await getFrameMessage(body)
   let button =
-    message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
+    message?.buttonIndex || body.untrustedData.buttonIndex;
 
   if (button == 1 && message) {
     return getTimer(message);

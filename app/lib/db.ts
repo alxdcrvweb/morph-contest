@@ -44,7 +44,7 @@ export const dbConnect = async () => {
   return cached.conn;
 };
 
-export const getWinners = async (hash: string) => {
+export const getWinners = async (hash?: string) => {
   await dbConnect();
   let users = await User.find();
   console.log(5, hash, users?.length);
