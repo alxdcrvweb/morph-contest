@@ -13,7 +13,7 @@ import { getWinners, getWinningStatus } from "../lib/db";
 import { FrameActionMessage } from "@farcaster/core";
 export async function getTimer(message: FrameActionDataParsedAndHubContext) {
   const total =
-    Date.parse("2024-02-21 03:48:00 GMT+0100") -
+    Date.parse("2024-02-21 03:55:00 GMT+0100") -
     Date.parse(new Date().toString());
   function getTimeRemaining(total: any) {
     const seconds = Math.floor((total / 1000) % 60);
