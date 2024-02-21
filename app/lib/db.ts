@@ -51,7 +51,7 @@ export const getWinners = async (hash?: string) => {
   if (users?.length > 0) {
     return false;
   }
-  let participants = await getCastRecasts(hash);
+  let participants = await getCastRecasts(hash!);
   let winners = getRandom(
     participants,
     participants?.length >= 10 ? 10 : participants?.length
