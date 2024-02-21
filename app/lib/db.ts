@@ -49,11 +49,12 @@ export const getWinners = async ( fid: number, hash?: string) => {
   await dbConnect();
   let users = await User.find();
   console.log(5, hash, users?.length);
-  await Check.findOneAndUpdate(
+  let asd = await Check.findOneAndUpdate(
     { isInitialized: true }, // query
     { $setOnInsert: { isInitialized:true }}, // new doc fields
     { upsert: true } // still use upsert option
   );
+  if(asd) return false;
   // if (users?.length > 0) {
   //   return false;
   // }
