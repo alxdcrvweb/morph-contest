@@ -44,24 +44,24 @@ export const dbConnect = async () => {
   return cached.conn;
 };
 
-export const getWinners = async (hash: string) => {
+export const getWinners = async (hash?: string) => {
   await dbConnect();
   let users = await User.find();
-  console.log(5, hash, users.length);
-  if (users.length > 0) {
+  console.log(5, hash, users?.length);
+  if (users?.length > 0) {
     return false;
   }
   let participants = await getCastRecasts(hash);
   let winners = getRandom(
     participants,
-    participants.length >= 10 ? 10 : participants.length
+    participants?.length >= 10 ? 10 : participants?.length
   );
 
   for (let winner of winners) {
     console.log(6);
     let userInfo = await getUserInfo(winner);
     let user = new User({
-      fid: winner,
+      fid: Number(winner),
       address: userInfo.result.user.custodyAddress,
       winner: true,
     });
@@ -80,13 +80,13 @@ export const getWinningStatus = async (fid: number) => {
   // }
   await dbConnect();
   let check = await User.find({ fid });
-  if (check.length > 0) return true;
+  if (check?.length > 0) return true;
   return false;
 };
 
 function getRandom(arr: number[], n: number) {
   var result: number[] = new Array(n),
-    len = arr.length,
+    len = arr?.length,
     taken = new Array(len);
   if (n > len)
     throw new RangeError("getRandom: more elements taken than available");

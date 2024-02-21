@@ -8,5 +8,5 @@ export const getUserInfo = async(fid:number) => {
 
 export const getCastRecasts = async(hash:string) => {
     let castInfo = await client.lookUpCastByHash(hash);
-    return castInfo.result.cast.recasts.fids;
+    return castInfo?.result?.cast?.recasts?.fids;
 }

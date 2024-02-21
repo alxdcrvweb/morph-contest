@@ -8,12 +8,11 @@ import { getTimer } from "../components/timer";
 export async function POST(request: NextRequest) {
   const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/traits.jpg`;
   const body = await request.json();
-  const { isValid, message } = await validateFrameMessage(body);
+  let message = await getFrameMessage(body)
   let button =
-    message?.data.frameActionBody.buttonIndex || body.untrustedData.buttonIndex;
-  let a = await getFrameMessage(body);
-  console.log(a)
-  console.log(bytesToHexString(message?.data.frameActionBody.castId?.hash!));
+    message?.buttonIndex || body.untrustedData.buttonIndex;
+  ;
+  console.log(message?.castId?.hash!);
 
   if (button == 1 && message) {
     return getTimer(message);
