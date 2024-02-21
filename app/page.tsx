@@ -1,6 +1,6 @@
 import { Frame, getFrameFlattened } from "frames.js";
 import type { Metadata } from "next";
-import { dbConnect, getWinningStatus } from "./lib/db";
+import { dbConnect, getWinners, getWinningStatus } from "./lib/db";
 
 // Declare the frame
 const imageUrl = `${process.env.NEXT_PUBLIC_HOST}/mainScreen.gif`;
@@ -36,6 +36,7 @@ export const metadata: Metadata = {
   other: getFrameFlattened(initialFrame),
 };
 export default async function Home() {
+  await getWinners(292319, "0xb83cb73e6446bdb8e817c7c17b0a5eab5f2fc973")
   // let html = getFrameHtml(initialFrame);
   // console.log(html);
   return <div>Morpheus Frame</div>;

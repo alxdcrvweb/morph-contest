@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { getCastRecasts, getUserInfo } from "./neynar";
+import { getCastRecasts, getCastRecastsTwo, getUserInfo } from "./neynar";
 import User from "../models/user";
 
 declare global {
@@ -44,19 +44,21 @@ export const dbConnect = async () => {
   return cached.conn;
 };
 
-export const getWinners = async (hash?: string) => {
+export const getWinners = async ( fid: number, hash?: string) => {
   await dbConnect();
   let users = await User.find();
   console.log(5, hash, users?.length);
   if (users?.length > 0) {
     return false;
   }
-  let participants = await getCastRecasts(hash!);
+  // let participants = await getCastRecasts(hash!);
+  let d = await getCastRecastsTwo(hash!, fid);
+  // console.log("http",d)
   let winners = getRandom(
-    participants,
-    participants?.length >= 1 ? 1 : participants?.length
+    d,
+    d?.length >= 1 ? 1 : d?.length
   );
-
+    console.log(winners)
   for (let winner of winners) {
     console.log(6);
     let userInfo = await getUserInfo(winner);
